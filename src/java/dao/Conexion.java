@@ -20,4 +20,10 @@ public class Conexion {
         }
         return cnx;
     }
+
+    public static void cerrarCnx() throws Exception {
+        if (Conexion.cnx != null) {
+            cnx.close();
+        } 
+    }
 }

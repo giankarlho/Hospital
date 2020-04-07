@@ -4,10 +4,9 @@ import java.util.Date;
 
 public class Paciente {
 
+    private Integer codigo;
     private String nombre;
-
     private String apellido;
-    
     private String telef;
     private String sexo;
     private String dni;
@@ -17,7 +16,15 @@ public class Paciente {
     private String ubigeo;
     private String grupo;
     private String estado;
-    private Date nacimiento ;  
+    private String nacimiento;
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
 
     public String getNombre() {
         return nombre;
@@ -107,12 +114,19 @@ public class Paciente {
         this.estado = estado;
     }
 
-    public Date getNacimiento() {
+//    public Date getNacimiento() {
+//        return nacimiento;
+//    }
+//
+//    public void setNacimiento(Date nacimiento) {
+//        this.nacimiento = nacimiento;
+//    }
+    public String getNacimiento() {
         return nacimiento;
     }
 
-    public void setNacimiento(Date nacimiento) {
+    public void setNacimiento(String nacimiento) {
         this.nacimiento = nacimiento;
     }
-    
+
 }
