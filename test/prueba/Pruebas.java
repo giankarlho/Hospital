@@ -1,8 +1,6 @@
 package prueba;
 
 import dao.Conexion;
-import java.sql.Connection;
-
 
 public class Pruebas {
 

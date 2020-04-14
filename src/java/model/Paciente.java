@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Paciente {
 
@@ -16,7 +16,8 @@ public class Paciente {
     private String ubigeo;
     private String grupo;
     private String estado;
-    private String nacimiento;
+    private Date nacimiento;
+//    private String nacimiento;
 
     public Integer getCodigo() {
         return codigo;
@@ -114,19 +115,20 @@ public class Paciente {
         this.estado = estado;
     }
 
-//    public Date getNacimiento() {
-//        return nacimiento;
-//    }
-//
-//    public void setNacimiento(Date nacimiento) {
-//        this.nacimiento = nacimiento;
-//    }
-    public String getNacimiento() {
+    public Date getNacimiento() {
         return nacimiento;
     }
 
-    public void setNacimiento(String nacimiento) {
+    public void setNacimiento(Date nacimiento) {
         this.nacimiento = nacimiento;
     }
+    
+//    public String getNacimiento() {
+//        return nacimiento;
+//    }
+//
+//    public void setNacimiento(String nacimiento) {
+//        this.nacimiento = nacimiento;
+//    }
 
 }

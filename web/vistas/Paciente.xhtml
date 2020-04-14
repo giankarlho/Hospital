@@ -3,44 +3,179 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"    
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
     <h:head>
         <title>Mantenimiento Pacientes</title>
+        <f:event listener="#{pacienteC.listar()}" type="preRenderView" />
     </h:head>
     <h:body>
+        <!--        Formulario del Menú>-->
         <h:form>
+            <p:sidebar widgetVar="sidebar1" baseZIndex="10000">
+                <h1 style="font-weight:normal">MENU</h1>
+                <p:panelMenu style="width:300px">
+                    <p:submenu label="Paciente">
+                        <p:menuitem value="Paciente" outcome="/vistas/Paciente"/>
+                        <p:menuitem value="PacienteNew" outcome="/vistas/Paciente"/>                        
+                    </p:submenu>
+                    <p:submenu label="Proveedor">
+                        <p:menuitem value="Registrar Proveedor" />
+                        <p:menuitem value="Listar Proveedor" />
+                    </p:submenu>
+                    <p:submenu label="Medicina">
+                        <p:menuitem value="Registrar Medicina" />
+                        <p:menuitem value="Listar Medicina" />
+                    </p:submenu>                                 
+                </p:panelMenu>
+                <p:commandButton value="Cancel" oncomplete="PF('sidebar1').hide()"/>
+            </p:sidebar>                
+            <p:commandButton icon="pi pi-arrow-right" oncomplete="PF('sidebar1').show()" />
+        </h:form>
+
+        <p:growl id="msj" showDetail="true" sticky="true" >
+            <p:autoUpdate/>
+        </p:growl>                 
+
+        <h:form id="frmPac">
             <p:panelGrid columns="2">
                 <p:outputLabel value="Nombre" />
-                <p:inputText value="#{pacienteC.paciente.nombre}"/>
+                <p:inputText value="#{pacienteC.paciente.nombre}" maxlength="30">
+                    <p:keyFilter regEx="/[A-Z_a-z_ñ_á_é_í_ó_ú]/"/>
+                </p:inputText>
                 <p:outputLabel value="Apellido" />
                 <p:inputText value="#{pacienteC.paciente.apellido}"/>
                 <p:outputLabel value="Sexo" />
                 <p:selectOneRadio id="sexo" value="#{pacienteC.paciente.sexo}" >
-                    <f:selectItem itemLabel="Masculino" itemValue="M" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Masculino" itemValue="M" />
                     <f:selectItem itemLabel="Femenino" itemValue="F" />
                 </p:selectOneRadio>
-                <p:commandButton value="listar" action="#{pacienteC.listar()}" update="tablaPac" />
-                <p:commandButton value="Registrar" action="#{pacienteC.registrar()}" />
+                <p:outputLabel value="DNI"/>
+                <p:inputText value="#{pacienteC.paciente.dni}" maxlength="8">
+                    <p:keyFilter regEx="/[0-9]/"/>
+                </p:inputText>
+                <p:outputLabel value="Dirección"/>
+                <p:inputText value="#{pacienteC.paciente.direccion}" maxlength="50"/>
+                <p:outputLabel value="Distrito"/>
+                <p:autoComplete value="#{pacienteC.paciente.ubigeo}" completeMethod="#{pacienteC.completeTextUbigeo}" />
+                <p:outputLabel value="Nacimiento dia/mes/año"/>
+                <p:inputMask id="date" value="#{pacienteC.paciente.nacimiento}" mask="99/99/9999"/>
+                <p:outputLabel for="grupo" value="Grupo Sangre:" />
+                <p:selectOneRadio id="grupo" value="#{pacienteC.paciente.grupo}" unselectable="true">
+                    <f:selectItem itemLabel="O+" itemValue="O+" />
+                    <f:selectItem itemLabel="O-" itemValue="O-" />
+                    <f:selectItem itemLabel="A" itemValue="A" />
+                    <f:selectItem itemLabel="B" itemValue="B" />
+                    <f:selectItem itemLabel="AB" itemValue="AB" />
+                </p:selectOneRadio>
             </p:panelGrid>
-            <p:dataTable var="pac" id="tablaPac" value="#{pacienteC.pacientes}">
+
+            <p:commandButton value="Registrar" action="#{pacienteC.registrar()}"  update="tablaPac"/>
+
+            <p:dataTable var="pac" id="tablaPac" value="#{pacienteC.lstPacientes}"
+                         rows="10" paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         rowsPerPageTemplate="3,6,9,12"> 
+
                 <p:column headerText="Id">
                     <h:outputText value="#{pac.codigo}" />
                 </p:column>
-
                 <p:column headerText="Nombre">
                     <h:outputText value="#{pac.nombre}" />
                 </p:column>
-
                 <p:column headerText="Apellido">
                     <h:outputText value="#{pac.apellido}" />
                 </p:column>
-
                 <p:column headerText="Sexo">
-                    <h:outputText value="#{pac.sexo}" />
+                    <h:outputText value="#{pac.sexo}" >
+                        <f:converter converterId="sexoConverter"/>
+                    </h:outputText>
                 </p:column>
-            </p:dataTable>
+                <p:column headerText="DNI">
+                    <h:outputText value="#{pac.dni}"/>
+                </p:column>
+                <p:column headerText="Dirección">
+                    <h:outputText value="#{pac.direccion}"/>
+                </p:column>
+                <p:column headerText="Distrito">
+                    <h:outputText value="#{pac.ubigeo}"/>
+                </p:column>
+                <p:column headerText="Nacimiento">
+                    <h:outputText value="#{pac.nacimiento}"/>
+                </p:column>
+                <p:column headerText="Grupo">
+                    <h:outputText value="#{pac.grupo}"/>
+                </p:column>
 
+                <p:column headerText="Modificar">
+                    <p:commandButton icon="ui-icon-build" 
+                                     oncomplete="PF('wdlgDatos').show();" 
+                                     update=":dlgDatos" >
+                        <f:setPropertyActionListener value="#{pac}" target="#{pacienteC.paciente}" />    
+                    </p:commandButton>                                    
+                </p:column>
+                <p:column>
+                    <p:commandButton icon="ui-icon-circle-close" actionListener="#{pacienteC.eliminar()}" update="tablaPac">
+                        <p:confirm header="Confirmación" message="¿Deseas Eliminar?" icon="ui-icon-alert"/>
+                        <p:tooltip trackMouse="true"/>
+                    </p:commandButton>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                    </p:confirmDialog>
+                </p:column>
+                <f:facet name="footer">
+                    EN TOTAL HAY #{fn:length(pacienteC.lstPacientes)} REGISTROS.
+                </f:facet>
+            </p:dataTable>
         </h:form>
+        <p:dialog header="Datos del Paciente" widgetVar="wdlgDatos" id="dlgDatos">
+            <h:form>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Nombre" />
+                    <p:inputText value="#{pacienteC.paciente.nombre}" maxlength="30">
+                        <p:keyFilter regEx="/[A-Z_a-z_ñ_á_é_í_ó_ú]/"/>
+                    </p:inputText>
+                    <p:outputLabel value="Apellido" />
+                    <p:inputText value="#{pacienteC.paciente.apellido}"/>
+                    <p:outputLabel value="Sexo" />
+                    <p:selectOneRadio id="sexo" value="#{pacienteC.paciente.sexo}" >
+                        <f:selectItem itemLabel="Masculino" itemValue="M" />
+                        <f:selectItem itemLabel="Femenino" itemValue="F" />
+                    </p:selectOneRadio>
+                    <p:outputLabel value="DNI"/>
+                    <p:inputText value="#{pacienteC.paciente.dni}" maxlength="8">
+                        <p:keyFilter regEx="/[0-9]/"/>
+                    </p:inputText>
+                    <p:outputLabel value="Dirección"/>
+                    <p:inputText value="#{pacienteC.paciente.direccion}" maxlength="50"/>
+                    <p:outputLabel value="Distrito"/>
+                    <p:autoComplete value="#{pacienteC.paciente.ubigeo}" completeMethod="#{pacienteC.completeTextUbigeo}" />
+                    <p:outputLabel value="Nacimiento dia/mes/año"/>
+                    <p:inputMask id="date" value="#{pacienteC.paciente.nacimiento}" mask="99/99/9999"/>
+                    <p:outputLabel for="grupo" value="Grupo Sangre:" />
+                    <p:selectOneRadio id="grupo" value="#{pacienteC.paciente.grupo}" unselectable="true">
+                        <f:selectItem itemLabel="O+" itemValue="O+" />
+                        <f:selectItem itemLabel="O-" itemValue="O-" />
+                        <f:selectItem itemLabel="A" itemValue="A" />
+                        <f:selectItem itemLabel="B" itemValue="B" />
+                        <f:selectItem itemLabel="AB" itemValue="AB" />
+                    </p:selectOneRadio>
+                </p:panelGrid>
+
+                <p:commandButton value="Cancelar" immediate="true" />
+                <p:commandButton value="Modificar" actionListener="#{pacienteC.modificar()}" 
+                                 update=":frmPac:tablaPac" oncomplete="PF('wdlgDatos').hide();" >
+                    <p:confirm header="Confirmación" message="¿Deseas Modificar?" icon="ui-icon-alert"/>
+                    <p:tooltip trackMouse="true"/>
+                </p:commandButton>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                </p:confirmDialog>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>
 
