@@ -13,10 +13,10 @@
         </p:growl>
         <h:form>
             <p:panelGrid columns="2">
-                <p:inputText value="#{usarioC.user}" placeholder="Usuario" maxlength="5"/>
+                <p:inputText value="#{usarioC.user}" placeholder="Usuario"/>
                 <p:password value="#{usarioC.pass}" placeholder="Contraseña" />                
             </p:panelGrid>
-            <p:commandButton value="Ingresar" action="#{usarioC.loginC()}" update="nombre nivel"  />            
+            <p:commandButton value="Ingresar" action="#{usarioC.loginC2()}" update="nombre nivel"  />            
         </h:form>
         <p:outputLabel value="#{usarioC.usuario.nombreUsuario}" id="nombre"/>
         <p:outputLabel value="#{usarioC.usuario.nivel}" id="nivel" />

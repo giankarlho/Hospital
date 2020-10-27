@@ -33,7 +33,8 @@ public class UsuarioD extends Conexion {
 
     public Usuario login2(String user, String pass) throws Exception {
         Usuario usuario = null;
-        String sql = "select nomusu, usuusu, pwdusu, levusu from usuario where usuusu='" + user + " and pwdusu='" + pass + "'";
+        String sql = "select nomusu, usuusu, pwdusu, levusu from usuario where"
+                + " usuusu='" + user + "' and pwdusu='" + pass + "'";
         try {
             Statement st = this.conectar().createStatement();
             ResultSet rs = st.executeQuery(sql);

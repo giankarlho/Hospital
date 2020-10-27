@@ -6,10 +6,22 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Página principal</title>
+        <f:event type="preRenderView" listener="#{usarioC.seguridadSesion()}" />
     </h:head>
     <h:body>
-        Este es el index
-        <br />        
+        <h:form>
+            <h:panelGrid rendered="#{usarioC.usuario.nivel == 1}">
+                <a href="Administrador.xhtml">
+                    <span>Administrador</span>
+                </a>
+            </h:panelGrid>
+            <h:panelGrid rendered="#{usarioC.usuario.nivel == 2}">
+            <a href="Operario.xhtml">
+                    <span>Operario</span>
+                </a>
+            </h:panelGrid>
+            <p:commandButton value="Cerrar Sesión" actionListener="#{usarioC.cerrarSesion()}"/>
+        </h:form>        
     </h:body>
 </html>
 
