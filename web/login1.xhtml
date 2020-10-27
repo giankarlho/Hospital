@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Ingreso al Sistema - Login Básico 1</title>
-        <f:event type="preRenderView" listener="#{usarioC.seguridadLogin()}" />
+        <f:event type="preRenderView" listener="#{usuarioC.seguridadLogin()}" />
     </h:head>
     <h:body>
         <p:growl id="msg" life="1500" showDetail="true">
@@ -14,13 +14,13 @@
         </p:growl>
         <h:form>
             <p:panelGrid columns="2">
-                <p:inputText value="#{usarioC.user}" placeholder="Usuario" maxlength="5"/>
-                <p:password value="#{usarioC.pass}" placeholder="Contraseña" />                
+                <p:inputText value="#{usuarioC.user}" placeholder="Usuario" maxlength="5"/>
+                <p:password value="#{usuarioC.pass}" placeholder="Contraseña" />                
             </p:panelGrid>
-            <p:commandButton value="Ingresar" action="#{usarioC.loginC()}" update="nombre nivel"  />            
+            <p:commandButton value="Ingresar" action="#{usuarioC.loginC()}" update="nombre nivel"  />            
         </h:form>
-        <p:outputLabel value="#{usarioC.usuario.nombreUsuario}" id="nombre"/>
-        <p:outputLabel value="#{usarioC.usuario.nivel}" id="nivel" />
+        <p:outputLabel value="#{usuarioC.usuario.nombreUsuario}" id="nombre"/>
+        <p:outputLabel value="#{usuarioC.usuario.nivel}" id="nivel" />
     </h:body>
 </html>
 

@@ -4,11 +4,13 @@ import com.model.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import services.Encriptar;
 
 public class UsuarioD extends Conexion {
 
     public Usuario login(String user, String pass) throws Exception {
         Usuario usuario = null;
+        //pass = Encriptar.encriptar(pass);        
         String sql = "select nomusu, usuusu, pwdusu, levusu from usuario where usuusu=? and pwdusu=?";
         try {
             PreparedStatement ps = this.conectar().prepareStatement(sql);
