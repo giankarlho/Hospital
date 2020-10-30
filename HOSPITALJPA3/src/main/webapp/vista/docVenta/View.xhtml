@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DocVentaViewDlg" widgetVar="DocVentaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.ViewDocVentaTitle}">
+            <h:form id="DocVentaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{docVentaController.selected != null}">
+                        <h:outputText value="#{vista.ViewDocVentaLabel_ncodDoc}"/>
+                        <h:outputText value="#{docVentaController.selected.ncodDoc}" title="#{vista.ViewDocVentaTitle_ncodDoc}"/>
+                        <h:outputText value="#{vista.ViewDocVentaLabel_numDoc}"/>
+                        <h:outputText value="#{docVentaController.selected.numDoc}" title="#{vista.ViewDocVentaTitle_numDoc}"/>
+                        <h:outputText value="#{vista.ViewDocVentaLabel_tipDoc}"/>
+                        <h:outputText value="#{docVentaController.selected.tipDoc}" title="#{vista.ViewDocVentaTitle_tipDoc}"/>
+                        <h:outputText value="#{vista.ViewDocVentaLabel_fchingDoc}"/>
+                        <h:outputText value="#{docVentaController.selected.fchingDoc}" title="#{vista.ViewDocVentaTitle_fchingDoc}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{vista.ViewDocVentaLabel_montDoc}"/>
+                        <h:outputText value="#{docVentaController.selected.montDoc}" title="#{vista.ViewDocVentaTitle_montDoc}"/>
+                        <h:outputText value="#{vista.ViewDocVentaLabel_obsDoc}"/>
+                        <h:outputText value="#{docVentaController.selected.obsDoc}" title="#{vista.ViewDocVentaTitle_obsDoc}"/>
+                        <h:outputText value="#{vista.ViewDocVentaLabel_numpac}"/>
+                        <h:outputText value="#{docVentaController.selected.numpac}" title="#{vista.ViewDocVentaTitle_numpac}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{vista.Close}" onclick="DocVentaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

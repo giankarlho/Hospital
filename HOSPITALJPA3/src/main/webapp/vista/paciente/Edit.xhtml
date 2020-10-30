@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PacienteEditDlg" widgetVar="PacienteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.EditPacienteTitle}">
+            <h:form id="PacienteEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pacienteController.selected != null}">
+                        <p:outputLabel value="#{vista.EditPacienteLabel_numpac}" for="numpac" />
+                        <p:inputText id="numpac" value="#{pacienteController.selected.numpac}" title="#{vista.EditPacienteTitle_numpac}" required="true" requiredMessage="#{vista.EditPacienteRequiredMessage_numpac}"/>
+                        <p:outputLabel value="#{vista.EditPacienteLabel_nompac}" for="nompac" />
+                        <p:inputText id="nompac" value="#{pacienteController.selected.nompac}" title="#{vista.EditPacienteTitle_nompac}" required="true" requiredMessage="#{vista.EditPacienteRequiredMessage_nompac}"/>
+                        <p:outputLabel value="#{vista.EditPacienteLabel_apepac}" for="apepac" />
+                        <p:inputText id="apepac" value="#{pacienteController.selected.apepac}" title="#{vista.EditPacienteTitle_apepac}" required="true" requiredMessage="#{vista.EditPacienteRequiredMessage_apepac}"/>
+                        <p:outputLabel value="#{vista.EditPacienteLabel_sexpac}" for="sexpac" />
+                        <p:inputText id="sexpac" value="#{pacienteController.selected.sexpac}" title="#{vista.EditPacienteTitle_sexpac}" required="true" requiredMessage="#{vista.EditPacienteRequiredMessage_sexpac}"/>
+                        <p:outputLabel value="#{vista.EditPacienteLabel_dnipac}" for="dnipac" />
+                        <p:inputText id="dnipac" value="#{pacienteController.selected.dnipac}" title="#{vista.EditPacienteTitle_dnipac}" required="true" requiredMessage="#{vista.EditPacienteRequiredMessage_dnipac}"/>
+                        <p:outputLabel value="#{vista.EditPacienteLabel_fnpac}" for="fnpac" />
+                        <p:calendar id="fnpac" pattern="MM/dd/yyyy HH:mm:ss" value="#{pacienteController.selected.fnpac}" title="#{vista.EditPacienteTitle_fnpac}"  showOn="button"/>
+                        <p:outputLabel value="#{vista.EditPacienteLabel_dirpac}" for="dirpac" />
+                        <p:inputText id="dirpac" value="#{pacienteController.selected.dirpac}" title="#{vista.EditPacienteTitle_dirpac}" />
+                        <p:outputLabel value="#{vista.EditPacienteLabel_numubi}" for="numubi" />
+                        <p:inputText id="numubi" value="#{pacienteController.selected.numubi}" title="#{vista.EditPacienteTitle_numubi}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pacienteController.update}" value="#{vista.Save}" update="display,:PacienteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PacienteEditDialog');"/>
+                    <p:commandButton value="#{vista.Cancel}" onclick="PacienteEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

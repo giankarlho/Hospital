@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProveedorEditDlg" widgetVar="ProveedorEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.EditProveedorTitle}">
+            <h:form id="ProveedorEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proveedorController.selected != null}">
+                        <p:outputLabel value="#{vista.EditProveedorLabel_numprov}" for="numprov" />
+                        <p:inputText id="numprov" value="#{proveedorController.selected.numprov}" title="#{vista.EditProveedorTitle_numprov}" required="true" requiredMessage="#{vista.EditProveedorRequiredMessage_numprov}"/>
+                        <p:outputLabel value="#{vista.EditProveedorLabel_nomprov}" for="nomprov" />
+                        <p:inputText id="nomprov" value="#{proveedorController.selected.nomprov}" title="#{vista.EditProveedorTitle_nomprov}" required="true" requiredMessage="#{vista.EditProveedorRequiredMessage_nomprov}"/>
+                        <p:outputLabel value="#{vista.EditProveedorLabel_rucprov}" for="rucprov" />
+                        <p:inputText id="rucprov" value="#{proveedorController.selected.rucprov}" title="#{vista.EditProveedorTitle_rucprov}" required="true" requiredMessage="#{vista.EditProveedorRequiredMessage_rucprov}"/>
+                        <p:outputLabel value="#{vista.EditProveedorLabel_dirprov}" for="dirprov" />
+                        <p:inputText id="dirprov" value="#{proveedorController.selected.dirprov}" title="#{vista.EditProveedorTitle_dirprov}" />
+                        <p:outputLabel value="#{vista.EditProveedorLabel_tipprov}" for="tipprov" />
+                        <p:inputText id="tipprov" value="#{proveedorController.selected.tipprov}" title="#{vista.EditProveedorTitle_tipprov}" />
+                        <p:outputLabel value="#{vista.EditProveedorLabel_telfprov}" for="telfprov" />
+                        <p:inputText id="telfprov" value="#{proveedorController.selected.telfprov}" title="#{vista.EditProveedorTitle_telfprov}" />
+                        <p:outputLabel value="#{vista.EditProveedorLabel_comprov}" for="comprov" />
+                        <p:inputText id="comprov" value="#{proveedorController.selected.comprov}" title="#{vista.EditProveedorTitle_comprov}" />
+                        <p:outputLabel value="#{vista.EditProveedorLabel_abrprov}" for="abrprov" />
+                        <p:inputText id="abrprov" value="#{proveedorController.selected.abrprov}" title="#{vista.EditProveedorTitle_abrprov}" />
+                        <p:outputLabel value="#{vista.EditProveedorLabel_numubi}" for="numubi" />
+                        <p:inputText id="numubi" value="#{proveedorController.selected.numubi}" title="#{vista.EditProveedorTitle_numubi}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proveedorController.update}" value="#{vista.Save}" update="display,:ProveedorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProveedorEditDialog');"/>
+                    <p:commandButton value="#{vista.Cancel}" onclick="ProveedorEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

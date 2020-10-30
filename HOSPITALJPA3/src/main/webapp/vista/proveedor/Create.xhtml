@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProveedorCreateDlg" widgetVar="ProveedorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.CreateProveedorTitle}">
+            <h:form id="ProveedorCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proveedorController.selected != null}">
+                        <p:outputLabel value="#{vista.CreateProveedorLabel_numprov}" for="numprov" />
+                        <p:inputText id="numprov" value="#{proveedorController.selected.numprov}" title="#{vista.CreateProveedorTitle_numprov}" required="true" requiredMessage="#{vista.CreateProveedorRequiredMessage_numprov}"/>
+                        <p:outputLabel value="#{vista.CreateProveedorLabel_nomprov}" for="nomprov" />
+                        <p:inputText id="nomprov" value="#{proveedorController.selected.nomprov}" title="#{vista.CreateProveedorTitle_nomprov}" required="true" requiredMessage="#{vista.CreateProveedorRequiredMessage_nomprov}"/>
+                        <p:outputLabel value="#{vista.CreateProveedorLabel_rucprov}" for="rucprov" />
+                        <p:inputText id="rucprov" value="#{proveedorController.selected.rucprov}" title="#{vista.CreateProveedorTitle_rucprov}" required="true" requiredMessage="#{vista.CreateProveedorRequiredMessage_rucprov}"/>
+                        <p:outputLabel value="#{vista.CreateProveedorLabel_dirprov}" for="dirprov" />
+                        <p:inputText id="dirprov" value="#{proveedorController.selected.dirprov}" title="#{vista.CreateProveedorTitle_dirprov}" />
+                        <p:outputLabel value="#{vista.CreateProveedorLabel_tipprov}" for="tipprov" />
+                        <p:inputText id="tipprov" value="#{proveedorController.selected.tipprov}" title="#{vista.CreateProveedorTitle_tipprov}" />
+                        <p:outputLabel value="#{vista.CreateProveedorLabel_telfprov}" for="telfprov" />
+                        <p:inputText id="telfprov" value="#{proveedorController.selected.telfprov}" title="#{vista.CreateProveedorTitle_telfprov}" />
+                        <p:outputLabel value="#{vista.CreateProveedorLabel_comprov}" for="comprov" />
+                        <p:inputText id="comprov" value="#{proveedorController.selected.comprov}" title="#{vista.CreateProveedorTitle_comprov}" />
+                        <p:outputLabel value="#{vista.CreateProveedorLabel_abrprov}" for="abrprov" />
+                        <p:inputText id="abrprov" value="#{proveedorController.selected.abrprov}" title="#{vista.CreateProveedorTitle_abrprov}" />
+                        <p:outputLabel value="#{vista.CreateProveedorLabel_numubi}" for="numubi" />
+                        <p:inputText id="numubi" value="#{proveedorController.selected.numubi}" title="#{vista.CreateProveedorTitle_numubi}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proveedorController.create}" value="#{vista.Save}" update="display,:ProveedorListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProveedorCreateDialog');"/>
+                    <p:commandButton value="#{vista.Cancel}" onclick="ProveedorCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

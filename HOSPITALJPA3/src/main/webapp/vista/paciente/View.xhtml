@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PacienteViewDlg" widgetVar="PacienteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.ViewPacienteTitle}">
+            <h:form id="PacienteViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pacienteController.selected != null}">
+                        <h:outputText value="#{vista.ViewPacienteLabel_numpac}"/>
+                        <h:outputText value="#{pacienteController.selected.numpac}" title="#{vista.ViewPacienteTitle_numpac}"/>
+                        <h:outputText value="#{vista.ViewPacienteLabel_nompac}"/>
+                        <h:outputText value="#{pacienteController.selected.nompac}" title="#{vista.ViewPacienteTitle_nompac}"/>
+                        <h:outputText value="#{vista.ViewPacienteLabel_apepac}"/>
+                        <h:outputText value="#{pacienteController.selected.apepac}" title="#{vista.ViewPacienteTitle_apepac}"/>
+                        <h:outputText value="#{vista.ViewPacienteLabel_sexpac}"/>
+                        <h:outputText value="#{pacienteController.selected.sexpac}" title="#{vista.ViewPacienteTitle_sexpac}"/>
+                        <h:outputText value="#{vista.ViewPacienteLabel_dnipac}"/>
+                        <h:outputText value="#{pacienteController.selected.dnipac}" title="#{vista.ViewPacienteTitle_dnipac}"/>
+                        <h:outputText value="#{vista.ViewPacienteLabel_fnpac}"/>
+                        <h:outputText value="#{pacienteController.selected.fnpac}" title="#{vista.ViewPacienteTitle_fnpac}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{vista.ViewPacienteLabel_dirpac}"/>
+                        <h:outputText value="#{pacienteController.selected.dirpac}" title="#{vista.ViewPacienteTitle_dirpac}"/>
+                        <h:outputText value="#{vista.ViewPacienteLabel_numubi}"/>
+                        <h:outputText value="#{pacienteController.selected.numubi}" title="#{vista.ViewPacienteTitle_numubi}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{vista.Close}" onclick="PacienteViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

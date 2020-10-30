@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioViewDlg" widgetVar="UsuarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.ViewUsuarioTitle}">
+            <h:form id="UsuarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <h:outputText value="#{vista.ViewUsuarioLabel_numusu}"/>
+                        <h:outputText value="#{usuarioController.selected.numusu}" title="#{vista.ViewUsuarioTitle_numusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_nomusu}"/>
+                        <h:outputText value="#{usuarioController.selected.nomusu}" title="#{vista.ViewUsuarioTitle_nomusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_usuusu}"/>
+                        <h:outputText value="#{usuarioController.selected.usuusu}" title="#{vista.ViewUsuarioTitle_usuusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_pwdusu}"/>
+                        <h:outputText value="#{usuarioController.selected.pwdusu}" title="#{vista.ViewUsuarioTitle_pwdusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_dniusu}"/>
+                        <h:outputText value="#{usuarioController.selected.dniusu}" title="#{vista.ViewUsuarioTitle_dniusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_telfusu}"/>
+                        <h:outputText value="#{usuarioController.selected.telfusu}" title="#{vista.ViewUsuarioTitle_telfusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_fnacusu}"/>
+                        <h:outputText value="#{usuarioController.selected.fnacusu}" title="#{vista.ViewUsuarioTitle_fnacusu}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_cargusu}"/>
+                        <h:outputText value="#{usuarioController.selected.cargusu}" title="#{vista.ViewUsuarioTitle_cargusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_ubiusu}"/>
+                        <h:outputText value="#{usuarioController.selected.ubiusu}" title="#{vista.ViewUsuarioTitle_ubiusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_levusu}"/>
+                        <h:outputText value="#{usuarioController.selected.levusu}" title="#{vista.ViewUsuarioTitle_levusu}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{vista.Close}" onclick="UsuarioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

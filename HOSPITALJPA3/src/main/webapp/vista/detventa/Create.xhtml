@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DetventaCreateDlg" widgetVar="DetventaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.CreateDetventaTitle}">
+            <h:form id="DetventaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{detventaController.selected != null}">
+                        <p:outputLabel value="#{vista.CreateDetventaLabel_numdetvta}" for="numdetvta" />
+                        <p:inputText id="numdetvta" value="#{detventaController.selected.numdetvta}" title="#{vista.CreateDetventaTitle_numdetvta}" required="true" requiredMessage="#{vista.CreateDetventaRequiredMessage_numdetvta}"/>
+                        <p:outputLabel value="#{vista.CreateDetventaLabel_nummed}" for="nummed" />
+                        <p:inputText id="nummed" value="#{detventaController.selected.nummed}" title="#{vista.CreateDetventaTitle_nummed}" required="true" requiredMessage="#{vista.CreateDetventaRequiredMessage_nummed}"/>
+                        <p:outputLabel value="#{vista.CreateDetventaLabel_ncodDoc}" for="ncodDoc" />
+                        <p:inputText id="ncodDoc" value="#{detventaController.selected.ncodDoc}" title="#{vista.CreateDetventaTitle_ncodDoc}" required="true" requiredMessage="#{vista.CreateDetventaRequiredMessage_ncodDoc}"/>
+                        <p:outputLabel value="#{vista.CreateDetventaLabel_cantvMed}" for="cantvMed" />
+                        <p:inputText id="cantvMed" value="#{detventaController.selected.cantvMed}" title="#{vista.CreateDetventaTitle_cantvMed}" />
+                        <p:outputLabel value="#{vista.CreateDetventaLabel_stotvDoc}" for="stotvDoc" />
+                        <p:inputText id="stotvDoc" value="#{detventaController.selected.stotvDoc}" title="#{vista.CreateDetventaTitle_stotvDoc}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{detventaController.create}" value="#{vista.Save}" update="display,:DetventaListForm:datalist,:growl" oncomplete="handleSubmit(args,'DetventaCreateDialog');"/>
+                    <p:commandButton value="#{vista.Cancel}" onclick="DetventaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProveedorViewDlg" widgetVar="ProveedorViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.ViewProveedorTitle}">
+            <h:form id="ProveedorViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proveedorController.selected != null}">
+                        <h:outputText value="#{vista.ViewProveedorLabel_numprov}"/>
+                        <h:outputText value="#{proveedorController.selected.numprov}" title="#{vista.ViewProveedorTitle_numprov}"/>
+                        <h:outputText value="#{vista.ViewProveedorLabel_nomprov}"/>
+                        <h:outputText value="#{proveedorController.selected.nomprov}" title="#{vista.ViewProveedorTitle_nomprov}"/>
+                        <h:outputText value="#{vista.ViewProveedorLabel_rucprov}"/>
+                        <h:outputText value="#{proveedorController.selected.rucprov}" title="#{vista.ViewProveedorTitle_rucprov}"/>
+                        <h:outputText value="#{vista.ViewProveedorLabel_dirprov}"/>
+                        <h:outputText value="#{proveedorController.selected.dirprov}" title="#{vista.ViewProveedorTitle_dirprov}"/>
+                        <h:outputText value="#{vista.ViewProveedorLabel_tipprov}"/>
+                        <h:outputText value="#{proveedorController.selected.tipprov}" title="#{vista.ViewProveedorTitle_tipprov}"/>
+                        <h:outputText value="#{vista.ViewProveedorLabel_telfprov}"/>
+                        <h:outputText value="#{proveedorController.selected.telfprov}" title="#{vista.ViewProveedorTitle_telfprov}"/>
+                        <h:outputText value="#{vista.ViewProveedorLabel_comprov}"/>
+                        <h:outputText value="#{proveedorController.selected.comprov}" title="#{vista.ViewProveedorTitle_comprov}"/>
+                        <h:outputText value="#{vista.ViewProveedorLabel_abrprov}"/>
+                        <h:outputText value="#{proveedorController.selected.abrprov}" title="#{vista.ViewProveedorTitle_abrprov}"/>
+                        <h:outputText value="#{vista.ViewProveedorLabel_numubi}"/>
+                        <h:outputText value="#{proveedorController.selected.numubi}" title="#{vista.ViewProveedorTitle_numubi}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{vista.Close}" onclick="ProveedorViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
